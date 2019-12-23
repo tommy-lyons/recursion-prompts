@@ -27,14 +27,6 @@ var sum = function(array) {
   }
 };
 
-var arr6 = [1, 2, 3, 4, 5, 6];
-sum(arr6);
-// console.log(arr6.slice(0, arr6.length-1));
-
-  var arr6 = [1, 2, 3, 4, 5, 6];
-  sum(arr6);
-  // console.log(arr6.slice(0, arr6.length-1));
-
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
