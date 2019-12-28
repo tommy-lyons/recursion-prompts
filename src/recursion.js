@@ -7,21 +7,38 @@
 // Example: 5! = 5 x 4 x 3 x 2 x 1 = 120
 // factorial(5); // 120
 var factorial = function(n) {
-  if (n < 0) { return null; }
-  if (n === 0) { return 1; }
-  if (n === 1) { return 1; }
-  if (n > 1) {return n * factorial(n - 1); }
+
+  // edge case if number is negative
+  if (n < 0) {
+    return null;
+  }
+  // edge case if number is zero
+  if (n === 0) {
+    return 1;
+  }
+  // base case, if number is === 1
+  if (n === 1) {
+    return 1;
+  }
+  // recursive case
+  if (n > 1) {
+    return n * factorial(n - 1);
+  }
 };
 
 // 2. Compute the sum of an array of integers.
 // sum([1,2,3,4,5,6]); // 21
 var sum = function(array) {
+
+  // edge case, if array is empty
   if (array.length === 0) {
     return 0;
   }
+  // base case, if array only contains one element
   if (array.length === 1) {
     return array[0];
   }
+  // recursive case, if array contains more than one element, run function recursively
   if (array.length > 1) {
     return array[array.length-1] + sum( array.slice(0, array.length-1) );
   }
@@ -30,21 +47,74 @@ var sum = function(array) {
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
+  var copy = array.slice();
+  var len = copy.length;
+
+  // edge case, if array is empty
+  if (len === 0) {
+    return 0;
+  }
+  // if array has only one element,
+  if (len === 1) {
+    // base case where array only has one element which is an integer
+    if (typeof copy[0] === 'number') {
+      return copy[0];
+    } else if (Array.isArray(copy[0])) {
+      // recursive case where array contains one element that's a nested array
+      return arraySum(copy[0]);
+    }
+  }
+  // recursive case, where array contains more than one element
+  if (len > 1 && typeof copy[len-1] === 'number') {
+    return copy[len-1] + arraySum(copy.slice(0, len-1));
+  } else if (len > 1 && Array.isArray(copy[len-1])) {
+    return arraySum(copy[len-1]) + arraySum(copy.slice(0, len-1));
+  }
 };
 
 // 4. Check if a number is even.
 var isEven = function(n) {
+  // base case if the number is zero, return true, or is it's -1 or +1, then return false
+  if (n === 0) {
+    return true;
+  } else if (n === 1 || n === -1) {
+    return false;
+  } else if (n < 0) {
+  // recursive case, if the number is not 0 or +/- 1, then add or subtract 2 from it run the function recursively.
+  // the function will continue to call itself until the number passed in is either of 0, -1, +1, which will result in a correct assignment of odd or even.
+    return isEven(n + 2);
+  } else if (n > 0) {
+    return isEven(n - 2);
+  }
 };
 
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
 // sumBelow(7); // 21
 var sumBelow = function(n) {
+  // base case
+  if (n === 0) {
+    return 0;
+  } else if (n === 1) {
+    return 0;
+  }
+  // recursive cases
+  else if (n > 1) {
+    return n - 1 + sumBelow(n - 1);
+  } else if (n < 0) {
+    return n + 1 + sumBelow(n + 1);
+  }
 };
 
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
+  if (x === y) {
+    return [];
+  } else if (x < y) {
+    var result = [];
+    result.push(X + 1)
+  }
 };
 
 // 7. Compute the exponent of a number.
