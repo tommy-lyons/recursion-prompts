@@ -109,12 +109,26 @@ var sumBelow = function(n) {
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
-  if (x === y) {
-    return [];
-  } else if (x < y) {
-    var result = [];
-    result.push(X + 1)
-  }
+  var top = y;
+  var bottom = x;
+  var range = [];
+  var first = top - 1;
+
+  //recursive function
+  var mapper = function (n) {
+    //edge case, if no integers in range, return with empty array
+    if (bottom === top || bottom === top - 1) {
+      return;
+    }
+    range.unshift(n);
+    if (n - 1 > bottom) {
+      mapper(n-1);
+    }
+  };
+
+  mapper(first);
+
+  return range;
 };
 
 // 7. Compute the exponent of a number.
