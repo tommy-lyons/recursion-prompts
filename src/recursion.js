@@ -108,28 +108,54 @@ var sumBelow = function(n) {
 
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
+
 var range = function(x, y) {
-  var top = y;
-  var bottom = x;
+
+  // if x > y then flip the values and proceed as normal
+  if (x > y) {
+    var tempX = x
+    x = y; y = tempX;
+    var reversed = true;
+  }
+
+  // edge cases
+  if (x === y || x === y - 1 || y === x - 1) {
+    return [];
+  }
+
+  // base case
+  if (y - x === 2) {
+    return [x + 1];
+  } else { // recursive case
+    var list = range(x, y - 1);
+    list.push(y - 1);
+  }
+
+  // reverse the array if the inputs were reversed at onset, so that elements are outputted in the correct order
+  if (reversed === true) {
+    list = list.reverse();
+  }
+  return list;
+};
+
+/*
+var range = function(x, y) {
   var range = [];
-  var first = top - 1;
+  var bottom;
+  var reversed = false;
 
-  //recursive function
+  //edge cases
+  if (x === y || x === y - 1 || y === x - 1) { return range; }
+  //inner recursive function
   var mapper = function (n) {
-    //edge case, if no integers in range, return with empty array
-    if (bottom === top || bottom === top - 1) {
-      return;
-    }
-    range.unshift(n);
-    if (n - 1 > bottom) {
-      mapper(n-1);
-    }
+    if (reversed) { range.push(n); } else { range.unshift(n); }
+    if (n - 1 > bottom) { mapper(n-1); }
   };
-
-  mapper(first);
 
   return range;
 };
+*/
+
 
 // 7. Compute the exponent of a number.
 // The exponent of a number says how many times the base number is used as a factor.
